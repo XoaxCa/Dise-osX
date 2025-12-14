@@ -2,142 +2,184 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Portafolio - Diseño Gráfico</title>
+  <title>Battle Royale 3D (tipo Fortnite)</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
+    body { margin:0; overflow:hidden; background:#000; font-family:Arial; }
+    #ui{
+      position:fixed; top:10px; left:10px;
+      background:rgba(0,0,0,.6); color:#fff;
+      padding:12px; border-radius:12px; font-size:14px;
     }
-
-    header {
-      background-color: #111;
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
+    #crosshair{
+      position:fixed; left:50%; top:50%;
+      width:10px; height:10px;
+      border:2px solid white; border-radius:50%;
+      transform:translate(-50%,-50%);
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    #gameOver{
+      position:fixed; inset:0; display:none;
+      justify-content:center; align-items:center;
+      flex-direction:column; background:rgba(0,0,0,.85);
+      color:white; font-size:40px;
     }
-
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-
-    section {
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #222;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    input, textarea {
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    button {
-      background-color: #111;
-      color: #fff;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #333;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #111;
-      color: #aaa;
-    }
+    button{ padding:10px 20px; font-size:18px; border-radius:10px; }
   </style>
 </head>
 <body>
+<div id="ui">
+  ❤️ Vida: <span id="hp">100</span><br>
+  🛡️ Escudo: <span id="shield">50</span><br>
+  🔫 Arma: <span id="weapon">Rifle</span><br>
+  🎯 Munición: <span id="ammo">30</span><br>
+  🧱 Material: <span id="mat">50</span>
+</div>
+<div id="crosshair"></div>
+<div id="gameOver">
+  💀 GAME OVER
+  <button onclick="location.reload()">Reintentar</button>
+</div>
 
-  <header>
-    <h1>Diseños Xoren</h1>
-    <p>Diseñador Gráfico | Freelance</p>
-  </header>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script>
+// ===== ESCENA =====
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x6b21a8, 30, 120);
 
-  <section>
-    <h2>Sobre mí</h2>
-    <p>Soy un diseñador gráfico apasionado por crear contenido visual atractivo y profesional. Me especializo en logos, banners, contenido para redes sociales y más.</p>
-  </section>
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 500);
+camera.position.set(0,5,10);
 
-  <section>
-    <h2>Servicios</h2>
-    <ul>
-      <li>✅ Diseño de logos</li>
-      <li>✅ Post para redes sociales</li>
-      <li>✅ Miniaturas para YouTube</li>
-      <li>✅ Flyers y tarjetas de presentación</li>
-    </ul>
-  </section>
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
 
-  <section>
-    <h2>Galería</h2>
-    <div class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Logo+1" alt="Trabajo 1" />
-      <img src="https://via.placeholder.com/300x200?text=Banner+2" alt="Trabajo 2" />
-      <img src="https://via.placeholder.com/300x200?text=Miniatura+3" alt="Trabajo 3" />
-    </div>
-  </section>
+// ===== LUCES =====
+scene.add(new THREE.HemisphereLight(0xffffff,0x444444,1));
+const sun = new THREE.DirectionalLight(0xffffff,1);
+sun.position.set(10,20,10);
+scene.add(sun);
 
-  <section>
-    <h2>Contáctame</h2>
-    <form onsubmit="enviarMensaje(); return false;">
-      <input type="text" placeholder="Tu nombre" required />
-      <input type="email" placeholder="Tu correo" required />
-      <textarea rows="5" placeholder="Tu mensaje" required></textarea>
-      <button type="submit">Enviar mensaje</button>
-    </form>
-  </section>
+// ===== SUELO =====
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(500,500),
+  new THREE.MeshStandardMaterial({color:0x1f2937})
+);
+floor.rotation.x = -Math.PI/2;
+scene.add(floor);
 
-  <footer>
-    <p>© 2025 Joaquín Cabañas - Todos los derechos reservados</p>
-  </footer>
+// ===== JUGADOR =====
+const player = {
+  hp:100, shield:50, ammo:30, mat:50,
+  weapon:"Rifle"
+};
 
-  <script>
-    function enviarMensaje() {
-      alert("Gracias por tu mensaje. ¡Te responderé pronto!");
-    }
-  </script>
+// ===== ARMAS =====
+const weapons = {
+  Rifle:{ dmg:20, rate:300, ammo:30 },
+  Shotgun:{ dmg:45, rate:800, ammo:8 },
+  SMG:{ dmg:12, rate:120, ammo:40 },
+  Sniper:{ dmg:80, rate:1200, ammo:5 },
+  Rocket:{ dmg:120, rate:1500, ammo:2 }
+};
 
+let currentWeapon = weapons.Rifle;
+let canShoot = true;
+
+// ===== DISPARO =====
+window.addEventListener('click', ()=>{
+  if(!canShoot || player.ammo<=0) return;
+  canShoot=false; player.ammo--;
+
+  const bullet = new THREE.Mesh(
+    new THREE.SphereGeometry(0.1,8,8),
+    new THREE.MeshBasicMaterial({color:0xfacc15})
+  );
+  bullet.position.copy(camera.position);
+  bullet.velocity = new THREE.Vector3();
+  camera.getWorldDirection(bullet.velocity);
+  bullet.velocity.multiplyScalar(1);
+  scene.add(bullet);
+
+  bullets.push(bullet);
+  setTimeout(()=>canShoot=true, currentWeapon.rate);
+});
+
+// ===== CAMBIO DE ARMA =====
+window.addEventListener('keydown',e=>{
+  if(e.key==='1'){currentWeapon=weapons.Rifle;player.weapon='Rifle';player.ammo=30}
+  if(e.key==='2'){currentWeapon=weapons.Shotgun;player.weapon='Shotgun';player.ammo=8}
+  if(e.key==='3'){currentWeapon=weapons.SMG;player.weapon='SMG';player.ammo=40}
+  if(e.key==='4'){currentWeapon=weapons.Sniper;player.weapon='Sniper';player.ammo=5}
+  if(e.key==='5'){currentWeapon=weapons.Rocket;player.weapon='Rocket';player.ammo=2}
+});
+
+// ===== MOVIMIENTO =====
+const keys={};
+window.addEventListener('keydown',e=>keys[e.key.toLowerCase()]=true);
+window.addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+
+// ===== BALAS =====
+const bullets=[];
+
+// ===== CONSTRUCCIÓN =====
+const builds=[];
+window.addEventListener('contextmenu',e=>{
+  e.preventDefault();
+  if(player.mat<=0) return;
+  const wall = new THREE.Mesh(
+    new THREE.BoxGeometry(4,4,0.5),
+    new THREE.MeshStandardMaterial({color:0x60a5fa})
+  );
+  wall.position.copy(camera.position);
+  camera.getWorldDirection(wall.position);
+  wall.position.multiplyScalar(6);
+  scene.add(wall);
+  builds.push(wall);
+  player.mat--;
+});
+
+// ===== TORMENTA =====
+let stormRadius = 200;
+function updateStorm(){
+  stormRadius -= 0.02;
+  scene.fog.near = stormRadius-40;
+  scene.fog.far = stormRadius;
+  if(camera.position.length()>stormRadius){
+    if(player.shield>0) player.shield--;
+    else player.hp--;
+  }
+}
+
+// ===== LOOP =====
+function animate(){
+  requestAnimationFrame(animate);
+
+  if(keys['w']) camera.position.z-=0.3;
+  if(keys['s']) camera.position.z+=0.3;
+  if(keys['a']) camera.position.x-=0.3;
+  if(keys['d']) camera.position.x+=0.3;
+
+  bullets.forEach((b,i)=>{
+    b.position.add(b.velocity);
+    if(b.position.length()>500){scene.remove(b);bullets.splice(i,1)}
+  });
+
+  updateStorm();
+
+  document.getElementById('hp').textContent=player.hp;
+  document.getElementById('shield').textContent=player.shield;
+  document.getElementById('ammo').textContent=player.ammo;
+  document.getElementById('weapon').textContent=player.weapon;
+  document.getElementById('mat').textContent=player.mat;
+
+  if(player.hp<=0){
+    document.getElementById('gameOver').style.display='flex';
+    return;
+  }
+
+  renderer.render(scene,camera);
+}
+
+animate();
+</script>
 </body>
 </html>
