@@ -3,429 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla Periódica Dinámica PRO</title>
+    <title>Desings JoaxCB | Portafolio Profesional</title>
     <style>
-       <style>
-    / --- ESTILOS ---/
-    body  {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: black; /* O puedes poner #000000 */
-    color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-   }
-
-    h1 { 
-        margin-top: 20px; 
-        text-align: center; 
-        font-size: 1.5rem; 
-        padding: 0 10px;
-    }
-    
-    p { 
-        color: #aaa; 
-        margin-bottom: 15px; 
-        text-align: center;
-        font-size: 0.9rem;
-    }
-
-    
-    #periodic-table {
-        display: grid;
-        /* Por defecto (PC): 60px */
-        grid-template-columns: repeat(18, 60px); 
-        grid-template-rows: repeat(7, 60px);
-        gap: 4px;
-        
-        
-        max-width: 100vw; /* Que no sea más ancho que la ventana */
-        overflow-x: auto; /* Scroll horizontal si no cabe */
-        padding: 10px; /* Espacio para que no se pegue a los bordes */
-        
-        /* Alineación: En PC centrado, en móvil empieza a la izquierda */
-        justify-content: start; 
-    }
-
-    /* Scroll suave para iOS */
-    #periodic-table { -webkit-overflow-scrolling: touch; }
-
-    /* --- ESTILO DE CADA ELEMENTO --- */
-    .element {
-        background-color: #333;
-        border: 1px solid #444;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
-        user-select: none;
-        /* Evita que el toque en móvil se sienta lento */
-        touch-action: manipulation; 
-    }
-
-    .element .number { font-size: 9px; position: absolute; top: 3px; left: 4px; opacity: 0.8; }
-    .element .symbol { font-size: 20px; font-weight: 700; }
-
-    /* --- COLORES --- */
-    .no-metal { background-color: #623678; }
-    .gas-noble { background-color: #8a3818; }
-    .metal-alcalino { background-color: #a81818; }
-    .metal-alcalinoterreo { background-color: #b56e07; }
-    .metaloide { background-color: #1f8a70; }
-    .halogeno { background-color: #185c8a; }
-    .metal-transicion { background-color: #4a5e78; }
-    .otros-metales { background-color: #3b6b4e; }
-    .lantanido { background-color: #ffb400; color: black; } /* Amarillo/Naranja */
-    .actinido { background-color: #dc5e5e; } /* Rosado/Rojo claro */
-
-    /* --- VENTANA MODAL --- */
-    #modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.85);
-        justify-content: center;
-        align-items: center; /* Centrado vertical */
-        z-index: 1000;
-        backdrop-filter: blur(5px);
-        padding: 20px; /* Margen de seguridad en móvil */
-        box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
-    }
-
-    #modal-content {
-        background: #1e1e1e;
-        padding: 25px;
-        border-radius: 15px;
-        
-        /* CAMBIO CLAVE: Ancho fluido */
-        width: 100%; 
-        max-width: 400px; /* En PC no pasa de 400px */
-        
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        position: relative;
-        border: 2px solid #555;
-        
-        /* Si el celular es muy bajito (landscape), permitir scroll vertical en el modal */
-        max-height: 90vh; 
-        overflow-y: auto;
-    }
-
-    #close-btn {
-        position: absolute;
-        top: 10px; right: 20px;
-        font-size: 30px;
-        cursor: pointer;
-        color: #aaa;
-        z-index: 2; 
-    }
-    
-// MODALESSS
-    #modal-symbol { font-size: 70px; font-weight: bold; margin: 0; line-height: 1; }
-    #modal-number { font-size: 20px; color: #888; position: absolute; top: 15px; left: 20px; font-weight: bold;}
-    #modal-name { font-size: 28px; margin: 5px 0 10px 0; color: #fff; }
-    #modal-category { 
-        font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
-        color: #fff; margin-bottom: 20px; padding: 5px 12px; border-radius: 20px; display: inline-block;
-    }
-
-    .data-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Dos columnas */
-        gap: 10px;
-        text-align: left;
-        background: #252525;
-        padding: 15px;
-        border-radius: 10px;
-    }
-    
-    .data-item span { display: block; font-size: 10px; color: #aaa; text-transform: uppercase; }
-    .data-item strong { font-size: 14px; color: #eee; }
-
-    /* --- MEDIA QUERY: LA MAGIA PARA CELULARES --- */
-    @media (max-width: 768px) {
-        /* 1. Hacemos la tabla más pequeña */
-        #periodic-table {
-            /* Celdas de 38px en vez de 60px */
-            grid-template-columns: repeat(18, 38px); 
-            grid-template-rows: repeat(7, 38px);
-            /* Alineamos al inicio para que el usuario pueda scrollear desde el principio */
-            justify-content: start; 
-            margin-left: 10px; /* Pequeño margen izquierdo */
+        /* --- ESTILOS GENERALES --- */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-light: #ecf0f1;
+            --text-dark: #333;
+            --white: #ffffff;
         }
 
-        /* 2. Ajustamos texto de las celdas */
-        .element .symbol { font-size: 14px; }
-        .element .number { font-size: 7px; top: 2px; left: 2px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* 3. Ajustes del Modal para pantallas muy pequeñas */
-        #modal-content { padding: 15px; width: 85%; }
-        #modal-symbol { font-size: 60px; }
-        
-        /* En celulares muy angostos, ponemos los datos en una sola columna */
-        .data-grid { grid-template-columns: 1fr; }
-    }
-   </style>
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- ENCABEZADO Y NAVEGACIÓN --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        /* --- HERO SECTION (INTRODUCCIÓN) --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        /* --- SECCIÓN DE EXPERIENCIA --- */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .exp-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .exp-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- PORTAFOLIO (IMÁGENES) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- CONTACTO --- */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        form {
+            text-align: left;
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        /* MEDIA QUERIES PARA MÓVILES */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .container { flex-direction: column; text-align: center; }
+            nav ul { margin-top: 15px; flex-direction: column; gap: 10px; }
+            .contact-info { gap: 1rem; flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Tabla Periódica</h1>
-    <p>Selecciona un elemento para ver su física detallada</p>
-    
-    <div id="periodic-table"></div>
+    <header>
+        <div class="container">
+            <div class="logo">Desings <span>JoaxCB</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#experiencia">Experiencia</a></li>
+                    <li><a href="#portafolio">Portafolio</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <div id="modal-overlay">
-        <div id="modal-content">
-            <span id="close-btn">&times;</span>
-            <div id="modal-number"></div>
-            <div id="modal-symbol"></div>
-            <h2 id="modal-name"></h2>
-            <div id="modal-category"></div>
+    <section id="hero" class="hero">
+        <h1>Diseño Visual que Impacta</h1>
+        <p>Especialista en Identidad Corporativa, Diseño UI y Branding Digital.</p>
+        <a href="#portafolio" class="btn">Ver Mi Trabajo</a>
+    </section>
 
-            <div class="data-grid">
-                <div class="data-item">
-                    <span>Masa Atómica</span>
-                    <strong id="modal-mass"></strong>
-                </div>
-                <div class="data-item">
-                    <span>Config. Electrónica</span>
-                    <strong id="modal-config"></strong>
-                </div>
-                <div class="data-item">
-                    <span>Electronegatividad (Pauling)</span>
-                    <strong id="modal-electronegativity"></strong>
-                </div>
-                <div class="data-item">
-                    <span>Estados de Oxidación</span>
-                    <strong id="modal-oxidation"></strong>
-                </div>
-                <div class="data-item">
-                    <span>Energía de Ionización</span>
-                    <strong id="modal-ionization"></strong>
-                </div>
-                <div class="data-item">
-                    <span>Estado (TPS)</span>
-                    <strong id="modal-state"></strong>
-                </div>
+    <section id="experiencia" class="section">
+        <h2 class="section-title">Mi Experiencia</h2>
+        <div class="experience-grid">
+            <div class="exp-card">
+                <h3>Director de Arte Junior</h3>
+                <span class="exp-date">2024 - Presente | Agencia Creativa 'Horizonte'</span>
+                <p>Lidero proyectos de rebranding para startups tecnológicas, gestionando un equipo de 3 diseñadores y asegurando la coherencia visual en múltiples plataformas.</p>
+            </div>
+            <div class="exp-card">
+                <h3>Diseñador Gráfico Freelance</h3>
+                <span class="exp-date">2022 - 2024 | Remoto</span>
+                <p>Colaboré con clientes internacionales en la creación de logotipos, material publicitario para redes sociales y diseño de empaques (packaging).</p>
+            </div>
+            <div class="exp-card">
+                <h3>Practicante de Diseño</h3>
+                <span class="exp-date">2021 - 2022 | Estudio Gráfico 'Píxel'</span>
+                <p>Asistencia en la edición fotográfica y maquetación editorial. Aprendizaje intensivo de herramientas como Illustrator y Photoshop.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // --- ELEMENTOSSSSS////
-        // oxidation: String con los estados comunes.
-        // ionization: Primera energía en kJ/mol.
-        const elementsData = [
-            // Periodo 1
-            { number: 1, symbol: "H", name: "Hidrógeno", mass: "1.008", category: "no-metal", electronegativity: "2.20", oxidation: "+1, -1", ionization: "1312 kJ/mol", config: "1s¹", state: "Gas", col: 1, row: 1 },
-            { number: 2, symbol: "He", name: "Helio", mass: "4.0026", category: "gas-noble", electronegativity: "-", oxidation: "-", ionization: "2372 kJ/mol", config: "1s²", state: "Gas", col: 18, row: 1 },
+    <section id="portafolio" class="section">
+        <h2 class="section-title">Trabajos Recientes</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/2c3e50/ffffff?text=Branding+Corporativo" alt="Proyecto 1">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/e74c3c/ffffff?text=Diseño+Web+UI" alt="Proyecto 2">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/3498db/ffffff?text=Ilustración+Digital" alt="Proyecto 3">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/27ae60/ffffff?text=Campaña+Publicitaria" alt="Proyecto 4">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/f39c12/ffffff?text=Fotografía+Editorial" alt="Proyecto 5">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300/8e44ad/ffffff?text=Packaging" alt="Proyecto 6">
+            </div>
+        </div>
+    </section>
 
-            // Periodo 2
-            { number: 3, symbol: "Li", name: "Litio", mass: "6.94", category: "metal-alcalino", electronegativity: "0.98", oxidation: "+1", ionization: "520 kJ/mol", config: "[He] 2s¹", state: "Sólido", col: 1, row: 2 },
-            { number: 4, symbol: "Be", name: "Berilio", mass: "9.0122", category: "metal-alcalinoterreo", electronegativity: "1.57", oxidation: "+2", ionization: "899 kJ/mol", config: "[He] 2s²", state: "Sólido", col: 2, row: 2 },
-            { number: 5, symbol: "B", name: "Boro", mass: "10.81", category: "metaloide", electronegativity: "2.04", oxidation: "+3", ionization: "800 kJ/mol", config: "[He] 2s² 2p¹", state: "Sólido", col: 13, row: 2 },
-            { number: 6, symbol: "C", name: "Carbono", mass: "12.011", category: "no-metal", electronegativity: "2.55", oxidation: "+4, +2, -4", ionization: "1086 kJ/mol", config: "[He] 2s² 2p²", state: "Sólido", col: 14, row: 2 },
-            { number: 7, symbol: "N", name: "Nitrógeno", mass: "14.007", category: "no-metal", electronegativity: "3.04", oxidation: "+5, +3, -3", ionization: "1402 kJ/mol", config: "[He] 2s² 2p³", state: "Gas", col: 15, row: 2 },
-            { number: 8, symbol: "O", name: "Oxígeno", mass: "15.999", category: "no-metal", electronegativity: "3.44", oxidation: "-2", ionization: "1314 kJ/mol", config: "[He] 2s² 2p⁴", state: "Gas", col: 16, row: 2 },
-            { number: 9, symbol: "F", name: "Flúor", mass: "18.998", category: "halogeno", electronegativity: "3.98", oxidation: "-1", ionization: "1681 kJ/mol", config: "[He] 2s² 2p⁵", state: "Gas", col: 17, row: 2 },
-            { number: 10, symbol: "Ne", name: "Neón", mass: "20.180", category: "gas-noble", electronegativity: "-", oxidation: "-", ionization: "2080 kJ/mol", config: "[He] 2s² 2p⁶", state: "Gas", col: 18, row: 2 },
+    <section id="contacto" class="section">
+        <h2 class="section-title">Contáctame</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>contacto@joaxcb-desings.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Teléfono</h4>
+                    <p>+52 55 1234 5678</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Ubicación</h4>
+                    <p>Ciudad de México, México</p>
+                </div>
+            </div>
 
-            // Periodo 3
-            { number: 11, symbol: "Na", name: "Sodio", mass: "22.990", category: "metal-alcalino", electronegativity: "0.93", oxidation: "+1", ionization: "496 kJ/mol", config: "[Ne] 3s¹", state: "Sólido", col: 1, row: 3 },
-            { number: 12, symbol: "Mg", name: "Magnesio", mass: "24.305", category: "metal-alcalinoterreo", electronegativity: "1.31", oxidation: "+2", ionization: "738 kJ/mol", config: "[Ne] 3s²", state: "Sólido", col: 2, row: 3 },
-            { number: 13, symbol: "Al", name: "Aluminio", mass: "26.982", category: "otros-metales", electronegativity: "1.61", oxidation: "+3", ionization: "578 kJ/mol", config: "[Ne] 3s² 3p¹", state: "Sólido", col: 13, row: 3 },
-            { number: 14, symbol: "Si", name: "Silicio", mass: "28.085", category: "metaloide", electronegativity: "1.90", oxidation: "+4, -4", ionization: "786 kJ/mol", config: "[Ne] 3s² 3p²", state: "Sólido", col: 14, row: 3 },
-            { number: 15, symbol: "P", name: "Fósforo", mass: "30.974", category: "no-metal", electronegativity: "2.19", oxidation: "+5, +3, -3", ionization: "1012 kJ/mol", config: "[Ne] 3s² 3p³", state: "Sólido", col: 15, row: 3 },
-            { number: 16, symbol: "S", name: "Azufre", mass: "32.06", category: "no-metal", electronegativity: "2.58", oxidation: "+6, +4, -2", ionization: "1000 kJ/mol", config: "[Ne] 3s² 3p⁴", state: "Sólido", col: 16, row: 3 },
-            { number: 17, symbol: "Cl", name: "Cloro", mass: "35.45", category: "halogeno", electronegativity: "3.16", oxidation: "+7, -1", ionization: "1251 kJ/mol", config: "[Ne] 3s² 3p⁵", state: "Gas", col: 17, row: 3 },
-            { number: 18, symbol: "Ar", name: "Argón", mass: "39.948", category: "gas-noble", electronegativity: "-", oxidation: "-", ionization: "1520 kJ/mol", config: "[Ne] 3s² 3p⁶", state: "Gas", col: 18, row: 3 },
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué puedo ayudarte?" required></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
 
-            // Periodo 4 (Selección)
-            { number: 19, symbol: "K", name: "Potasio", mass: "39.098", category: "metal-alcalino", electronegativity: "0.82", oxidation: "+1", ionization: "419 kJ/mol", config: "[Ar] 4s¹", state: "Sólido", col: 1, row: 4 },
-            { number: 20, symbol: "Ca", name: "Calcio", mass: "40.078", category: "metal-alcalinoterreo", electronegativity: "1.00", oxidation: "+2", ionization: "590 kJ/mol", config: "[Ar] 4s²", state: "Sólido", col: 2, row: 4 },
-            { number: 21, symbol: "Sc", name: "Escandio", mass: "44.956", category: "metal-transicion", electronegativity: "1.36", oxidation: "+3", ionization: "633 kJ/mol", config: "[Ar] 3d¹ 4s²", state: "Sólido", col: 3, row: 4 },
-            { number: 22, symbol: "Ti", name: "Titanio", mass: "47.867", category: "metal-transicion", electronegativity: "1.54", oxidation: "+4, +3", ionization: "658 kJ/mol", config: "[Ar] 3d² 4s²", state: "Sólido", col: 4, row: 4 },
-            { number: 23, symbol: "V", name: "Vanadio", mass: "50.942", category: "metal-transicion", electronegativity: "1.63", oxidation: "+5, +4", ionization: "650 kJ/mol", config: "[Ar] 3d³ 4s²", state: "Sólido", col: 5, row: 4 },
-            { number: 24, symbol: "Cr", name: "Cromo", mass: "51.996", category: "metal-transicion", electronegativity: "1.66", oxidation: "+6, +3", ionization: "652 kJ/mol", config: "[Ar] 3d⁵ 4s¹", state: "Sólido", col: 6, row: 4 },
-            { number: 25, symbol: "Mn", name: "Manganeso", mass: "54.938", category: "metal-transicion", electronegativity: "1.55", oxidation: "+7, +4, +2", ionization: "717 kJ/mol", config: "[Ar] 3d⁵ 4s²", state: "Sólido", col: 7, row: 4 },
-            { number: 26, symbol: "Fe", name: "Hierro", mass: "55.845", category: "metal-transicion", electronegativity: "1.83", oxidation: "+3, +2", ionization: "762 kJ/mol", config: "[Ar] 3d⁶ 4s²", state: "Sólido", col: 8, row: 4 },
-            { number: 27, symbol: "Co", name: "Cobalto", mass: "58.933", category: "metal-transicion", electronegativity: "1.88", oxidation: "+3, +2", ionization: "760 kJ/mol", config: "[Ar] 3d⁷ 4s²", state: "Sólido", col: 9, row: 4 },
-            { number: 28, symbol: "Ni", name: "Níquel", mass: "58.693", category: "metal-transicion", electronegativity: "1.91", oxidation: "+3, +2", ionization: "737 kJ/mol", config: "[Ar] 3d⁸ 4s²", state: "Sólido", col: 10, row: 4 },
-            { number: 29, symbol: "Cu", name: "Cobre", mass: "63.546", category: "metal-transicion", electronegativity: "1.90", oxidation: "+2, +1", ionization: "745 kJ/mol", config: "[Ar] 3d¹⁰ 4s¹", state: "Sólido", col: 11, row: 4 },
-            { number: 30, symbol: "Zn", name: "Zinc", mass: "65.38", category: "metal-transicion", electronegativity: "1.65", oxidation: "+2", ionization: "906 kJ/mol", config: "[Ar] 3d¹⁰ 4s²", state: "Sólido", col: 12, row: 4 },
-            { number: 31, symbol: "Ga", name: "Galio", mass: "69.723", category: "otros-metales", electronegativity: "1.81", oxidation: "+3", ionization: "579 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p¹", state: "Sólido", col: 13, row: 4 },
-            { number: 32, symbol: "Ge", name: "Germanio", mass: "72.63", category: "metaloide", electronegativity: "2.01", oxidation: "+4", ionization: "762 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p²", state: "Sólido", col: 14, row: 4 },
-            { number: 33, symbol: "As", name: "Arsénico", mass: "74.922", category: "metaloide", electronegativity: "2.18", oxidation: "+5, +3, -3", ionization: "947 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p³", state: "Sólido", col: 15, row: 4 },
-            { number: 34, symbol: "Se", name: "Selenio", mass: "78.96", category: "no-metal", electronegativity: "2.55", oxidation: "+6, +4, -2", ionization: "941 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p⁴", state: "Sólido", col: 16, row: 4 },
-            { number: 35, symbol: "Br", name: "Bromo", mass: "79.904", category: "halogeno", electronegativity: "2.96", oxidation: "+5, -1", ionization: "1140 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p⁵", state: "Líquido", col: 17, row: 4 },
-            { number: 36, symbol: "Kr", name: "Kriptón", mass: "83.798", category: "gas-noble", electronegativity: "3.00", oxidation: "+2", ionization: "1351 kJ/mol", config: "[Ar] 3d¹⁰ 4s² 4p⁶", state: "Gas", col: 18, row: 4 },
+    <footer>
+        <p>&copy; 2026 Desings JoaxCB. Todos los derechos reservados.</p>
+    </footer>
 
-    // --- PERIODO 5 ---
-           { number: 37, symbol: "Rb", name: "Rubidio", mass: "85.468", category: "metal-alcalino", electronegativity: "0.82", oxidation: "+1", ionization: "403 kJ/mol", config: "[Kr] 5s¹", state: "Sólido", col: 1, row: 5 },
-          { number: 38, symbol: "Sr", name: "Estroncio", mass: "87.62", category: "metal-alcalinoterreo", electronegativity: "0.95", oxidation: "+2", ionization: "549 kJ/mol", config: "[Kr] 5s²", state: "Sólido", col: 2, row: 5 },
-          { number: 39, symbol: "Y", name: "Itrio", mass: "88.906", category: "metal-transicion", electronegativity: "1.22", oxidation: "+3", ionization: "600 kJ/mol", config: "[Kr] 4d¹ 5s²", state: "Sólido", col: 3, row: 5 },
-    { number: 40, symbol: "Zr", name: "Circonio", mass: "91.224", category: "metal-transicion", electronegativity: "1.33", oxidation: "+4", ionization: "640 kJ/mol", config: "[Kr] 4d² 5s²", state: "Sólido", col: 4, row: 5 },
-    { number: 41, symbol: "Nb", name: "Niobio", mass: "92.906", category: "metal-transicion", electronegativity: "1.6", oxidation: "+5, +3", ionization: "652 kJ/mol", config: "[Kr] 4d⁴ 5s¹", state: "Sólido", col: 5, row: 5 },
-    { number: 42, symbol: "Mo", name: "Molibdeno", mass: "95.94", category: "metal-transicion", electronegativity: "2.16", oxidation: "+6", ionization: "684 kJ/mol", config: "[Kr] 4d⁵ 5s¹", state: "Sólido", col: 6, row: 5 },
-    { number: 43, symbol: "Tc", name: "Tecnecio", mass: "98", category: "metal-transicion", electronegativity: "1.9", oxidation: "+7", ionization: "702 kJ/mol", config: "[Kr] 4d⁵ 5s²", state: "Sólido", col: 7, row: 5 },
-    { number: 44, symbol: "Ru", name: "Rutenio", mass: "101.07", category: "metal-transicion", electronegativity: "2.2", oxidation: "+3", ionization: "710 kJ/mol", config: "[Kr] 4d⁷ 5s¹", state: "Sólido", col: 8, row: 5 },
-    { number: 45, symbol: "Rh", name: "Rodio", mass: "102.91", category: "metal-transicion", electronegativity: "2.28", oxidation: "+3", ionization: "720 kJ/mol", config: "[Kr] 4d⁸ 5s¹", state: "Sólido", col: 9, row: 5 },
-    { number: 46, symbol: "Pd", name: "Paladio", mass: "106.42", category: "metal-transicion", electronegativity: "2.20", oxidation: "+2, +4", ionization: "804 kJ/mol", config: "[Kr] 4d¹⁰", state: "Sólido", col: 10, row: 5 },
-    { number: 47, symbol: "Ag", name: "Plata", mass: "107.87", category: "metal-transicion", electronegativity: "1.93", oxidation: "+1", ionization: "731 kJ/mol", config: "[Kr] 4d¹⁰ 5s¹", state: "Sólido", col: 11, row: 5 },
-    { number: 48, symbol: "Cd", name: "Cadmio", mass: "112.41", category: "metal-transicion", electronegativity: "1.69", oxidation: "+2", ionization: "867 kJ/mol", config: "[Kr] 4d¹⁰ 5s²", state: "Sólido", col: 12, row: 5 },
-    { number: 49, symbol: "In", name: "Indio", mass: "114.82", category: "otros-metales", electronegativity: "1.78", oxidation: "+3", ionization: "558 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p¹", state: "Sólido", col: 13, row: 5 },
-    { number: 50, symbol: "Sn", name: "Estaño", mass: "118.71", category: "otros-metales", electronegativity: "1.96", oxidation: "+4, +2", ionization: "708 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p²", state: "Sólido", col: 14, row: 5 },
-    { number: 51, symbol: "Sb", name: "Antimonio", mass: "121.76", category: "metaloide", electronegativity: "2.05", oxidation: "+5, +3, -3", ionization: "834 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p³", state: "Sólido", col: 15, row: 5 },
-    { number: 52, symbol: "Te", name: "Telurio", mass: "127.60", category: "metaloide", electronegativity: "2.1", oxidation: "+6, +4, -2", ionization: "869 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p⁴", state: "Sólido", col: 16, row: 5 },
-    { number: 53, symbol: "I", name: "Yodo", mass: "126.90", category: "halogeno", electronegativity: "2.66", oxidation: "+7, +5, -1", ionization: "1008 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p⁵", state: "Sólido", col: 17, row: 5 },
-    { number: 54, symbol: "Xe", name: "Xenón", mass: "131.29", category: "gas-noble", electronegativity: "2.60", oxidation: "+2, +4", ionization: "1170 kJ/mol", config: "[Kr] 4d¹⁰ 5s² 5p⁶", state: "Gas", col: 18, row: 5 },
-
-    // --- PERIODO 6 ---
-    { number: 55, symbol: "Cs", name: "Cesio", mass: "132.91", category: "metal-alcalino", electronegativity: "0.79", oxidation: "+1", ionization: "375 kJ/mol", config: "[Xe] 6s¹", state: "Sólido", col: 1, row: 6 },
-    { number: 56, symbol: "Ba", name: "Bario", mass: "137.33", category: "metal-alcalinoterreo", electronegativity: "0.89", oxidation: "+2", ionization: "502 kJ/mol", config: "[Xe] 6s²", state: "Sólido", col: 2, row: 6 },
-    
-    // LANTÁNIDOS (Fila especial abajo, Row 8)
-    { number: 57, symbol: "La", name: "Lantano", mass: "138.91", category: "lantanido", electronegativity: "1.1", oxidation: "+3", ionization: "538 kJ/mol", config: "[Xe] 5d¹ 6s²", state: "Sólido", col: 3, row: 8 },
-    { number: 58, symbol: "Ce", name: "Cerio", mass: "140.12", category: "lantanido", electronegativity: "1.12", oxidation: "+3, +4", ionization: "534 kJ/mol", config: "[Xe] 4f¹ 5d¹ 6s²", state: "Sólido", col: 4, row: 8 },
-    { number: 59, symbol: "Pr", name: "Praseodimio", mass: "140.91", category: "lantanido", electronegativity: "1.13", oxidation: "+3", ionization: "527 kJ/mol", config: "[Xe] 4f³ 6s²", state: "Sólido", col: 5, row: 8 },
-    { number: 60, symbol: "Nd", name: "Neodimio", mass: "144.24", category: "lantanido", electronegativity: "1.14", oxidation: "+3", ionization: "533 kJ/mol", config: "[Xe] 4f⁴ 6s²", state: "Sólido", col: 6, row: 8 },
-    { number: 61, symbol: "Pm", name: "Prometio", mass: "145", category: "lantanido", electronegativity: "-", oxidation: "+3", ionization: "540 kJ/mol", config: "[Xe] 4f⁵ 6s²", state: "Sólido", col: 7, row: 8 },
-    { number: 62, symbol: "Sm", name: "Samario", mass: "150.36", category: "lantanido", electronegativity: "1.17", oxidation: "+3", ionization: "544 kJ/mol", config: "[Xe] 4f⁶ 6s²", state: "Sólido", col: 8, row: 8 },
-    { number: 63, symbol: "Eu", name: "Europio", mass: "151.96", category: "lantanido", electronegativity: "-", oxidation: "+3, +2", ionization: "547 kJ/mol", config: "[Xe] 4f⁷ 6s²", state: "Sólido", col: 9, row: 8 },
-    { number: 64, symbol: "Gd", name: "Gadolinio", mass: "157.25", category: "lantanido", electronegativity: "1.20", oxidation: "+3", ionization: "593 kJ/mol", config: "[Xe] 4f⁷ 5d¹ 6s²", state: "Sólido", col: 10, row: 8 },
-    { number: 65, symbol: "Tb", name: "Terbio", mass: "158.93", category: "lantanido", electronegativity: "-", oxidation: "+3", ionization: "565 kJ/mol", config: "[Xe] 4f⁹ 6s²", state: "Sólido", col: 11, row: 8 },
-    { number: 66, symbol: "Dy", name: "Disprosio", mass: "162.50", category: "lantanido", electronegativity: "1.22", oxidation: "+3", ionization: "573 kJ/mol", config: "[Xe] 4f¹⁰ 6s²", state: "Sólido", col: 12, row: 8 },
-    { number: 67, symbol: "Ho", name: "Holmio", mass: "164.93", category: "lantanido", electronegativity: "1.23", oxidation: "+3", ionization: "581 kJ/mol", config: "[Xe] 4f¹¹ 6s²", state: "Sólido", col: 13, row: 8 },
-    { number: 68, symbol: "Er", name: "Erbio", mass: "167.26", category: "lantanido", electronegativity: "1.24", oxidation: "+3", ionization: "589 kJ/mol", config: "[Xe] 4f¹² 6s²", state: "Sólido", col: 14, row: 8 },
-    { number: 69, symbol: "Tm", name: "Tulio", mass: "168.93", category: "lantanido", electronegativity: "1.25", oxidation: "+3", ionization: "596 kJ/mol", config: "[Xe] 4f¹³ 6s²", state: "Sólido", col: 15, row: 8 },
-    { number: 70, symbol: "Yb", name: "Iterbio", mass: "173.04", category: "lantanido", electronegativity: "-", oxidation: "+3, +2", ionization: "603 kJ/mol", config: "[Xe] 4f¹⁴ 6s²", state: "Sólido", col: 16, row: 8 },
-    { number: 71, symbol: "Lu", name: "Lutecio", mass: "174.97", category: "lantanido", electronegativity: "1.27", oxidation: "+3", ionization: "523 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹ 6s²", state: "Sólido", col: 17, row: 8 },
-
-    // Continuación Periodo 6
-    { number: 72, symbol: "Hf", name: "Hafnio", mass: "178.49", category: "metal-transicion", electronegativity: "1.3", oxidation: "+4", ionization: "658 kJ/mol", config: "[Xe] 4f¹⁴ 5d² 6s²", state: "Sólido", col: 4, row: 6 },
-    { number: 73, symbol: "Ta", name: "Tántalo", mass: "180.95", category: "metal-transicion", electronegativity: "1.5", oxidation: "+5", ionization: "761 kJ/mol", config: "[Xe] 4f¹⁴ 5d³ 6s²", state: "Sólido", col: 5, row: 6 },
-    { number: 74, symbol: "W", name: "Wolframio", mass: "183.84", category: "metal-transicion", electronegativity: "2.36", oxidation: "+6", ionization: "770 kJ/mol", config: "[Xe] 4f¹⁴ 5d⁴ 6s²", state: "Sólido", col: 6, row: 6 },
-    { number: 75, symbol: "Re", name: "Renio", mass: "186.21", category: "metal-transicion", electronegativity: "1.9", oxidation: "+7", ionization: "760 kJ/mol", config: "[Xe] 4f¹⁴ 5d⁵ 6s²", state: "Sólido", col: 7, row: 6 },
-    { number: 76, symbol: "Os", name: "Osmio", mass: "190.23", category: "metal-transicion", electronegativity: "2.2", oxidation: "+4", ionization: "840 kJ/mol", config: "[Xe] 4f¹⁴ 5d⁶ 6s²", state: "Sólido", col: 8, row: 6 },
-    { number: 77, symbol: "Ir", name: "Iridio", mass: "192.22", category: "metal-transicion", electronegativity: "2.20", oxidation: "+4", ionization: "880 kJ/mol", config: "[Xe] 4f¹⁴ 5d⁷ 6s²", state: "Sólido", col: 9, row: 6 },
-    { number: 78, symbol: "Pt", name: "Platino", mass: "195.08", category: "metal-transicion", electronegativity: "2.28", oxidation: "+4, +2", ionization: "870 kJ/mol", config: "[Xe] 4f¹⁴ 5d⁹ 6s¹", state: "Sólido", col: 10, row: 6 },
-    { number: 79, symbol: "Au", name: "Oro", mass: "196.97", category: "metal-transicion", electronegativity: "2.54", oxidation: "+3, +1", ionization: "890 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹", state: "Sólido", col: 11, row: 6 },
-    { number: 80, symbol: "Hg", name: "Mercurio", mass: "200.59", category: "metal-transicion", electronegativity: "2.00", oxidation: "+2, +1", ionization: "1007 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s²", state: "Líquido", col: 12, row: 6 },
-    { number: 81, symbol: "Tl", name: "Talio", mass: "204.38", category: "otros-metales", electronegativity: "1.62", oxidation: "+1, +3", ionization: "589 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹", state: "Sólido", col: 13, row: 6 },
-    { number: 82, symbol: "Pb", name: "Plomo", mass: "207.2", category: "otros-metales", electronegativity: "2.33", oxidation: "+2, +4", ionization: "715 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²", state: "Sólido", col: 14, row: 6 },
-    { number: 83, symbol: "Bi", name: "Bismuto", mass: "208.98", category: "otros-metales", electronegativity: "2.02", oxidation: "+3", ionization: "703 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³", state: "Sólido", col: 15, row: 6 },
-    { number: 84, symbol: "Po", name: "Polonio", mass: "209", category: "metaloide", electronegativity: "2.0", oxidation: "+4, +2", ionization: "812 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴", state: "Sólido", col: 16, row: 6 },
-    { number: 85, symbol: "At", name: "Astato", mass: "210", category: "halogeno", electronegativity: "2.2", oxidation: "-1, +1", ionization: "920 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵", state: "Sólido", col: 17, row: 6 },
-    { number: 86, symbol: "Rn", name: "Radón", mass: "222", category: "gas-noble", electronegativity: "-", oxidation: "-", ionization: "1037 kJ/mol", config: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶", state: "Gas", col: 18, row: 6 },
-
-    // --- PERIODO 7 ---
-    { number: 87, symbol: "Fr", name: "Francio", mass: "223", category: "metal-alcalino", electronegativity: "0.7", oxidation: "+1", ionization: "380 kJ/mol", config: "[Rn] 7s¹", state: "Sólido", col: 1, row: 7 },
-    { number: 88, symbol: "Ra", name: "Radio", mass: "226", category: "metal-alcalinoterreo", electronegativity: "0.9", oxidation: "+2", ionization: "509 kJ/mol", config: "[Rn] 7s²", state: "Sólido", col: 2, row: 7 },
-
-    // ACTÍNIDOS (Fila especial abajo, Row 9)
-    { number: 89, symbol: "Ac", name: "Actinio", mass: "227", category: "actinido", electronegativity: "1.1", oxidation: "+3", ionization: "499 kJ/mol", config: "[Rn] 6d¹ 7s²", state: "Sólido", col: 3, row: 9 },
-    { number: 90, symbol: "Th", name: "Torio", mass: "232.04", category: "actinido", electronegativity: "1.3", oxidation: "+4", ionization: "587 kJ/mol", config: "[Rn] 6d² 7s²", state: "Sólido", col: 4, row: 9 },
-    { number: 91, symbol: "Pa", name: "Protactinio", mass: "231.04", category: "actinido", electronegativity: "1.5", oxidation: "+5", ionization: "568 kJ/mol", config: "[Rn] 5f² 6d¹ 7s²", state: "Sólido", col: 5, row: 9 },
-    { number: 92, symbol: "U", name: "Uranio", mass: "238.03", category: "actinido", electronegativity: "1.38", oxidation: "+6, +4", ionization: "597 kJ/mol", config: "[Rn] 5f³ 6d¹ 7s²", state: "Sólido", col: 6, row: 9 },
-    { number: 93, symbol: "Np", name: "Neptunio", mass: "237", category: "actinido", electronegativity: "1.36", oxidation: "+5", ionization: "604 kJ/mol", config: "[Rn] 5f⁴ 6d¹ 7s²", state: "Sólido", col: 7, row: 9 },
-    { number: 94, symbol: "Pu", name: "Plutonio", mass: "244", category: "actinido", electronegativity: "1.28", oxidation: "+4", ionization: "584 kJ/mol", config: "[Rn] 5f⁶ 7s²", state: "Sólido", col: 8, row: 9 },
-    { number: 95, symbol: "Am", name: "Americio", mass: "243", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "578 kJ/mol", config: "[Rn] 5f⁷ 7s²", state: "Sólido", col: 9, row: 9 },
-    { number: 96, symbol: "Cm", name: "Curio", mass: "247", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "581 kJ/mol", config: "[Rn] 5f⁷ 6d¹ 7s²", state: "Sólido", col: 10, row: 9 },
-    { number: 97, symbol: "Bk", name: "Berkelio", mass: "247", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "601 kJ/mol", config: "[Rn] 5f⁹ 7s²", state: "Sólido", col: 11, row: 9 },
-    { number: 98, symbol: "Cf", name: "Californio", mass: "251", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "608 kJ/mol", config: "[Rn] 5f¹⁰ 7s²", state: "Sólido", col: 12, row: 9 },
-    { number: 99, symbol: "Es", name: "Einstenio", mass: "252", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "619 kJ/mol", config: "[Rn] 5f¹¹ 7s²", state: "Sólido", col: 13, row: 9 },
-    { number: 100, symbol: "Fm", name: "Fermio", mass: "257", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "627 kJ/mol", config: "[Rn] 5f¹² 7s²", state: "Sólido", col: 14, row: 9 },
-    { number: 101, symbol: "Md", name: "Mendelevio", mass: "258", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "635 kJ/mol", config: "[Rn] 5f¹³ 7s²", state: "Sólido", col: 15, row: 9 },
-    { number: 102, symbol: "No", name: "Nobelio", mass: "259", category: "actinido", electronegativity: "1.3", oxidation: "+2", ionization: "642 kJ/mol", config: "[Rn] 5f¹⁴ 7s²", state: "Sólido", col: 16, row: 9 },
-    { number: 103, symbol: "Lr", name: "Lawrencio", mass: "266", category: "actinido", electronegativity: "1.3", oxidation: "+3", ionization: "-", config: "[Rn] 5f¹⁴ 7s² 7p¹", state: "Sólido", col: 17, row: 9 },
-
-    // Continuación Periodo 7
-    { number: 104, symbol: "Rf", name: "Rutherfordio", mass: "267", category: "metal-transicion", electronegativity: "-", oxidation: "+4", ionization: "-", config: "[Rn] 5f¹⁴ 6d² 7s²", state: "Sintético", col: 4, row: 7 },
-    { number: 105, symbol: "Db", name: "Dubnio", mass: "268", category: "metal-transicion", electronegativity: "-", oxidation: "+5", ionization: "-", config: "[Rn] 5f¹⁴ 6d³ 7s²", state: "Sintético", col: 5, row: 7 },
-    { number: 106, symbol: "Sg", name: "Seaborgio", mass: "269", category: "metal-transicion", electronegativity: "-", oxidation: "+6", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁴ 7s²", state: "Sintético", col: 6, row: 7 },
-    { number: 107, symbol: "Bh", name: "Bohrio", mass: "270", category: "metal-transicion", electronegativity: "-", oxidation: "+7", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁵ 7s²", state: "Sintético", col: 7, row: 7 },
-    { number: 108, symbol: "Hs", name: "Hassio", mass: "277", category: "metal-transicion", electronegativity: "-", oxidation: "+8", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁶ 7s²", state: "Sintético", col: 8, row: 7 },
-    { number: 109, symbol: "Mt", name: "Meitnerio", mass: "278", category: "metal-transicion", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁷ 7s²", state: "Sintético", col: 9, row: 7 },
-    { number: 110, symbol: "Ds", name: "Darmstadtio", mass: "281", category: "metal-transicion", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁸ 7s²", state: "Sintético", col: 10, row: 7 },
-    { number: 111, symbol: "Rg", name: "Roentgenio", mass: "282", category: "metal-transicion", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d⁹ 7s²", state: "Sintético", col: 11, row: 7 },
-    { number: 112, symbol: "Cn", name: "Copernicio", mass: "285", category: "metal-transicion", electronegativity: "-", oxidation: "+2", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s²", state: "Sintético", col: 12, row: 7 },
-    { number: 113, symbol: "Nh", name: "Nihonio", mass: "286", category: "otros-metales", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹", state: "Sintético", col: 13, row: 7 },
-    { number: 114, symbol: "Fl", name: "Flerovio", mass: "289", category: "otros-metales", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²", state: "Sintético", col: 14, row: 7 },
-    { number: 115, symbol: "Mc", name: "Moscovio", mass: "290", category: "otros-metales", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³", state: "Sintético", col: 15, row: 7 },
-    { number: 116, symbol: "Lv", name: "Livermorio", mass: "293", category: "otros-metales", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴", state: "Sintético", col: 16, row: 7 },
-    { number: 117, symbol: "Ts", name: "Teneso", mass: "294", category: "halogeno", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵", state: "Sintético", col: 17, row: 7 },
-    { number: 118, symbol: "Og", name: "Oganesón", mass: "294", category: "gas-noble", electronegativity: "-", oxidation: "-", ionization: "-", config: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶", state: "Sintético", col: 18, row: 7 },
-        ];
-
-        const tableContainer = document.getElementById('periodic-table');
-        const modal = document.getElementById('modal-overlay');
-        const closeBtn = document.getElementById('close-btn');
-
-      //TABLA//
-        function createTable() {
-            elementsData.forEach(element => {
-                const elDiv = document.createElement('div');
-                elDiv.classList.add('element', element.category);
-                elDiv.style.gridColumn = element.col;
-                elDiv.style.gridRow = element.row;
-                elDiv.innerHTML = `<span class="number">${element.number}</span><span class="symbol">${element.symbol}</span>`;
-                elDiv.addEventListener('click', () => openModal(element));
-                tableContainer.appendChild(elDiv);
-            });
-        }
-
-        // DATOS///
-        function openModal(data) {
-            // Datos básicos
-            document.getElementById('modal-number').innerText = data.number;
-            document.getElementById('modal-symbol').innerText = data.symbol;
-            document.getElementById('modal-name').innerText = data.name;
-            document.getElementById('modal-mass').innerText = data.mass + ' u';
-            document.getElementById('modal-config').innerText = data.config;
-            document.getElementById('modal-state').innerText = data.state;
-            
-            // NUEVOS DATOS
-            document.getElementById('modal-electronegativity').innerText = data.electronegativity;
-            document.getElementById('modal-oxidation').innerText = data.oxidation;
-            document.getElementById('modal-ionization').innerText = data.ionization;
-
-            // Estilos dinámicos
-            const modalContent = document.getElementById('modal-content');
-            const categoryLabel = document.getElementById('modal-category');
-            
-            const color = getCategoryColor(data.category);
-            modalContent.style.borderColor = color;
-            categoryLabel.innerText = data.category.replace('-', ' ').toUpperCase();
-            categoryLabel.style.backgroundColor = color;
-            document.getElementById('modal-symbol').style.color = color;
-
-            modal.style.display = 'flex';
-        }
-
-        function getCategoryColor(categoryClass) {
-            const colors = {
-                'no-metal': '#623678',
-                'gas-noble': '#8a3818',
-                'metal-alcalino': '#a81818',
-                'metal-alcalinoterreo': '#b56e07',
-                'metaloide': '#1f8a70',
-                'halogeno': '#185c8a',
-                'metal-transicion': '#4a5e78',
-                'otros-metales': '#3b6b4e'
-            };
-            return colors[categoryClass] || '#555';
-        }
-
-        closeBtn.onclick = () => modal.style.display = 'none';
-        window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; }
-
-        createTable();
-    </script>
 </body>
 </html>
